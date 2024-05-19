@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=" 1.0 />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0%;
+      padding: 0%;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    .container {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .background {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: url("./pexels-binyamin-mellish-1396122.jpg") no-repeat center
+        center/cover;
+      z-index: -1;
+      filter: blur(18px);
+    }
+    form {
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff44;
+      gap: 15px;
+      font-size: 18px;
+      padding: 10px 20px 30px 20px;
+      z-index: 2;
+    }
+    form header {
+      text-align: center;
+    }
+
+    form .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    form .form-group input {
+      width: 100%;
+      height: 50px;
+      border: none;
+      font-family: inherit;
+      font-size: inherit;
+      padding-left: 10px;
+    }
+    form .form-group input:focus {
+      outline: none;
+    }
+    form button {
+      width: 100%;
+      height: 50px;
+      outline: none;
+      border: none;
+      background-color: rgb(0, 0, 0);
+      font-size: inherit;
+      font-weight: bold;
+      color: white;
+    }
+    .input-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+    }
+    .input-box i {
+      font-size: 20px;
+      padding-left: 10px;
+    }
+    .form-group ul {
+      list-style: none;
+    }
+
+    .uCase,
+    .lCase,
+    .number,
+    .symbol,
+    .len {
+      color: rgb(0, 0, 0);
+    }
+    .uCase.valid,
+    .lCase.valid,
+    .number.valid,
+    .symbol.valid,
+    .len.valid {
+      display: none;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="background"></div>
+      <form action="" autocomplete="off">
+        <header>
+          <h1>Login</h1>
+        </header>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <div class="input-box">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" id="email" placeholder="Enter your email" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-box">
+            <i class="fa-solid fa-lock"></i>
+            <input
+              type="text"
+              id="password"
+              placeholder="Enter your password"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <ul>
+            <li class="number">
+              <i class="fa-solid fa-arrow-right"></i> at least 1 number
+            </li>
+            <li class="len">
+              <i class="fa-solid fa-arrow-right"></i> length should be 8
+            </li>
+            <li class="symbol">
+              <i class="fa-solid fa-arrow-right"></i> at least 1 symbol letter
+            </li>
+
+            <li class="uCase">
+              <i class="fa-solid fa-arrow-right"></i> at least 1 uppercase
+              letter
+            </li>
+
+            <li class="lCase">
+              <i class="fa-solid fa-arrow-right"></i> at least 1 lowercase
+              letter
+            </li>
+          </ul>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script>
+      let password = document.querySelector("form #password");
+      password.addEventListener("input", (e) => {
+        let pass = e.target.value;
+        let uCase = document.querySelector(".uCase");
+        let lCase = document.querySelector(".lCase");
+        let symbol = document.querySelector(".symbol");
+        let number = document.querySelector(".number");
+        let ul = document.querySelector("ul");
+        let len = document.querySelector(".len");
+        let bg = document.querySelector(".background");
+
+        let symbolCase = /[:@$^&#_);(.,~!`*}{?|%-]/g;
+        if (pass.match(symbolCase)) {
+          symbol.classList.add("valid");
+        } else {
+          symbol.classList.remove("valid");
+        }
+        let upperCase = /[A-Z]/g;
+
+        if (pass.match(upperCase)) {
+          uCase.classList.add("valid");
+        } else {
+          uCase.classList.remove("valid");
+        }
+
+        let lowerCase = /[a-z]/g;
+        if (pass.match(lowerCase)) {
+          lCase.classList.add("valid");
+        } else {
+          lCase.classList.remove("valid");
+        }
+        let numCase = /[0-9]/g;
+        if (pass.match(numCase)) {
+          number.classList.add("valid");
+        } else {
+          number.classList.remove("valid");
+        }
+
+        if (pass.length >= 8) {
+          len.classList.add("valid");
+        } else {
+          len.classList.remove("valid");
+        }
+
+        let blurValue = 16 - pass.length * 2;
+        bg.style.filter = `blur(${blurValue}px)`;
+      });
+    </script>
+  </body>
+</html>
